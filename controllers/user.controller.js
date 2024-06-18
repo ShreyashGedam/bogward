@@ -8,7 +8,7 @@ userRouter.post("/signup", async (req, res) => {
 
   try {
     const existingUser = await UserModal.findOne({
-      $or: [{ email }, { name }],
+      $or: [{ email }, { name }, { mobile }],
     });
 
     if (existingUser) {
