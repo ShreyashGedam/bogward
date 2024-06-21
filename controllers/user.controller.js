@@ -12,7 +12,9 @@ userRouter.post("/signup", async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(409).send({ message: "User already exists" });
+      return res
+        .status(409)
+        .send({ message: "User already exists", status: false });
     }
 
     const user = new UserModal({ name, email, mobile });
@@ -41,7 +43,9 @@ userRouter.post("/login", async (req, res) => {
     const user = await UserModal.findOne({ email, mobile });
 
     if (!user) {
-      return res.status(401).send({ message: "Invalid email or mobile" });
+      return res
+        .status(401)
+        .send({ message: "Invalid email or mobile", status: false });
     }
 
     res.status(200).send({
