@@ -17,6 +17,11 @@ userRouter.post("/signup", async (req, res) => {
         .send({ message: "User already exists", status: false });
     }
 
+    if (!name || !email || !mobile)
+      return res
+        .status(400)
+        .send({ message: "Please enter some value", status: false });
+
     const user = new UserModal({ name, email, mobile });
     await user.save();
 
