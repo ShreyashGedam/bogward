@@ -15,4 +15,22 @@ productRouter.get("", async (req, res) => {
   }
 });
 
+productRouter.get("/:id", async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await productModal.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).send(product);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ error: error.message || "Something went wrong" });
+  }
+});
+
 module.exports = productRouter;
